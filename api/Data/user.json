@@ -1,0 +1,42 @@
+{
+  "data":[
+    {
+      "id":1,
+      "name":"tangalai",
+      "Desktop":[
+        {
+          "id":1,
+          "name":"folder1",
+          "type":"folder",
+          "items":[]
+        },
+          {
+            "id":2,
+            "name":"folder2",
+            "type":"folder",
+            "items":[
+                {
+                  "id":4,
+                  "name":"folder3",
+                  "type":"folder",
+                  "items":[]
+                },
+                {
+                  "id":5,
+                  "name":"file1",
+                  "type":"file",
+                  "items":[]
+                }
+            ]
+          },
+          {
+            "id":6,
+            "name":"file2",
+            "type":"file",
+            "items":[]
+          }
+      ]
+
+    }
+  ]
+}
