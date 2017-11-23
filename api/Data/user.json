@@ -8,7 +8,8 @@
           "id":1,
           "name":"folder1",
           "type":"folder",
-          "items":[]
+          "items":[],
+          "key":1
         },
           {
             "id":2,
@@ -19,21 +20,25 @@
                   "id":4,
                   "name":"folder3",
                   "type":"folder",
-                  "items":[]
+                  "items":[],
+                  "key":4
                 },
                 {
                   "id":5,
                   "name":"file1",
                   "type":"file",
-                  "items":[]
+                  "items":[],
+                  "key":5
                 }
-            ]
+            ],
+            "key":2
           },
           {
             "id":6,
             "name":"file2",
             "type":"file",
-            "items":[]
+            "items":[],
+            "key":6
           }
       ]
 

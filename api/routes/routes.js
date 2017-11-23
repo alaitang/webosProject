@@ -24,7 +24,9 @@ var appRouter = function(app) {
        console.log( err );
 
        res.setHeader('Content-Type', 'application/json');
-       res.send(data);
+       let result = JSON.parse(data);
+       console.log(typeof result);
+       res.send(result.data[0]);
    });
 /*
     var accountMock = {
