@@ -21,7 +21,7 @@ app.use(function (req, res, next) {
 });
 
 var appRouter = require("./api/routes/routes.js");
-appRouter(app);
+new appRouter(app);
 var server = app.listen(4000, function () {
     console.log("Listening on port %s...", server.address().port);
 });
