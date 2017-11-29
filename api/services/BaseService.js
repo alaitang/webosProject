@@ -13,46 +13,48 @@ class BaseService{
   }
 
   searchMany(query,userid,callBack){
+    MongoClient.connect(this.getConnectionUrl(),(err, db)=>{
+      db.collection(this.getCollectionName()).find(query).toArray(callBack);
+  });
 
+  }
+
+  searchManyAsync(query,userid){
+        return new Promise((resolve, reject)=>{
+          MongoClient.connect(this.getConnectionUrl()).then((db)=>{
+            db.collection(this.getCollectionName()).find(query)
+            .then((data)=>{
+              resolve(data);
+            },(err)=>{
+              reject(err);
+            });
+          },(err)=>{
+              reject(err);
+          });
+        });
   }
 
   searchOne(id,userid,callBack){
       MongoClient.connect(this.getConnectionUrl(),(err, db)=>{
-        db.collection(this.getCollectionName()).findOne({_id:new mongo.ObjectId(id)}).then(callBack);
+        db.collection(this.getCollectionName()).findOne({_id:new mongo.ObjectId(id)},callBack);
       });
   }
 
   searchOneAsnyc(id,userid){
 
     return new Promise((resolve, reject)=>{
-
       MongoClient.connect(this.getConnectionUrl()).then((db)=>{
-        db.collection(this.getCollectionName()).findOne({})
+        db.collection(this.getCollectionName()).findOne({_id:new mongo.ObjectId(id)})
         .then((data)=>{
           resolve(data);
         },(err)=>{
-          reject();
+          reject(err);
         });
       },(err)=>{
-          reject();
+          reject(err);
       });
 
     });
-/*
-    return new Promise((resolve, reject)=>{
-        this.getConnection().then((err, db)=>{
-          db.collection(this.getCollectionName()).findOne({_id:new mongo.ObjectId(id)}).then((err,result)=>
-              {
-                if (err) {
-                  reject(err);
-                } else {
-                    resolve(db);
-                }
-            }
-          );
-        });
-    });
-    */
   }
 
   create(item,userid,callBack){
