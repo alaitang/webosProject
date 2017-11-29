@@ -5,6 +5,8 @@ var mongo = require('mongodb');
 var pwd = "";
 var connectionURL = "mongodb://alai:tangalai110@cluster0-shard-00-00-br3sc.mongodb.net:27017,cluster0-shard-00-01-br3sc.mongodb.net:27017,cluster0-shard-00-02-br3sc.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
 
+var UserController = require("../controllers/UserController");
+
 class appRouter{
   constructor(app){
     app.get("/", function(req, res) {
@@ -66,17 +68,26 @@ class appRouter{
   /*****************/
 
     app.get("/userInfo", function(req, res) {
+      console.log(UserController);
 
-      //var jsonPath = path.join(__dirname, '..', 'config', 'dev', 'foobar.json');
-      var dataResult = {};
-      fs.readFile("./api/Data/user.json", 'utf8', function (err, data) {
-
-         res.setHeader('Content-Type', 'application/json');
-         let result = JSON.parse(data);
-         //console.log(typeof result);
-         res.send(result.data[0]);
-     });
-
+        var userid = req.query.userid;
+        UserController.getUserInfoAsnyc(userid).then((result)=>{
+          console.log(result);
+          res.setHeader('Content-Type', 'application/json');
+          res.send({name:"abc"});
+        },(err)=>{
+          console.log("something wrong");
+          console.log(err);
+          res.setHeader('Content-Type', 'application/json');
+          res.send({name:"abc"});
+        });
+        /*
+        UserController.getUserInfo(userid,(err, result)=>{
+          console.log("coming call back");
+          res.setHeader('Content-Type', 'application/json');
+          res.send({});
+      });
+      */
     });
   }
 }
