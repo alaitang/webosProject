@@ -10,13 +10,15 @@ class FolderController{
     var folderid = (req.query.folderid == null || req.query.folderid == undefined) ? "" : req.query.folderid;
     this.folderService.getFolders(userid,folderid,(err,data)=>{
       res.setHeader('Content-Type', 'application/json');
+      
       res.send({data:data.map((item)=>{
         return {
           id:item._id,
           name:item.name,
           type:"folder",
           items:[],
-          key : item._id.toString()
+          key : item._id.toString(),
+          parentFolderId:folderid
         }
       })});
     });
